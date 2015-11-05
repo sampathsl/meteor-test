@@ -1,0 +1,52 @@
+<head>
+  <title>meteor</title>
+</head>
+
+<body>
+
+  <div class="container-hope">
+
+  <h1>Welcome to Meteor!</h1>
+  <h2>Let's Hope ... </h2>
+
+	{{#if currentUser}}
+	
+		<label class="hide-hopes">
+			<input type="checkbox" checked="{{hideHopes}}" />
+			Hide Achieved Hopes ...
+		</label>
+	
+  	{{else}}
+	
+		<div>
+			*To add hopes please SignIn
+		</div>
+	
+	{{/if}}
+	
+	{{> loginButtons}}
+	
+  	{{#if currentUser}}
+  	<form class="my-form-hope">
+  		<input type="text" id="txthope" name="txthope" size="30" placeholder="Add a new hope" class="txt-hope" />
+  		<input type="button" name="btnhope" value="Add your hope!" class="btn-hope" />
+  	</form>
+  	{{/if}}
+
+  	<ul>
+  		{{#each hopes}}
+			{{> tempHope}}
+  		{{/each}}
+  	</ul>
+  	
+  </div>
+
+</body>
+
+<template name="tempHope">
+  <li class="{{#if checked}} li-checked {{/if}}">
+  	<input type="checkbox" name="checkbhope" class="checkb-hope" checked="{{checked}}" />
+  	<span class="li-text">{{hope}} : {{created}}</span>
+  	<input type="button" name="btndelhope" class="btn-del-hope" value="Delete"/>
+  </li>
+</template>
