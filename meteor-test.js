@@ -1,51 +1,70 @@
-Hopes = new Mongo.Collection("hopes");
+Ideas = new Mongo.Collection("ideas");
+
+if (Meteor.isServer) {
+
+  Meteor.startup(function(){
+    //code to run server at startup
+  });
+
+  //meteor remove autopublish
+  //publish idea data
+  Meteor.publish("ideas",function(){
+    return Ideas.find();
+  });
+
+}
 
 if (Meteor.isClient) {
 
+  //subscribe from published ideas
+  Meteor.subscribe("ideas");
+
   Template.body.helpers({
-    hopes : function () {
-      if(SessionAmplify.get('hideHopes')){
-        return Hopes.find({checked : { $ne : true}});
+    ideas : function () {
+      if(SessionAmplify.get('hideIdeas')){
+        return Ideas.find({checked : { $ne : true}});
       }
-      return Hopes.find();
+      return Ideas.find();
     },
-    hideHopes : function () {
-      return SessionAmplify.get("hideHopes");
+    hideIdeas : function () {
+      return SessionAmplify.get("hideIdeas");
     }
   });
 
   //body events
   Template.body.events({
-    'click .my-form-hope' : function(event){
-      var txtHope = document.getElementById('txthope');
-      if(txtHope && txtHope.value != ""){
+    'click .my-form-idea' : function(event){
+      var txtIdea = document.getElementById('txtidea');
+      if(txtIdea && txtIdea.value != ""){
         //remove the client side data insert part
-        /*Hopes.insert({
-          hope : txtHope.value,
+        /*Ideas.insert({
+          hope : txtIdea.value,
           created : new Date()
         });*/
-        Meteor.call("addHope",txtHope.value);
+        Meteor.call("addIdea",txtIdea.value);
       }
-      document.getElementById('txthope').value = "";
+      document.getElementById('txtidea').value = "";
       return false;
     },
-    'change .hide-hopes input': function (event) {
-      SessionAmplify.set("hideHopes", event.target.checked);
+    'change .hide-ideas input': function (event) {
+      SessionAmplify.set("hideIdeas", event.target.checked);
     }
   });
 
   //tempHope events
-  Template.tempHope.events({
-    'click .btn-del-hope' : function(){
+  Template.tempIdea.events({
+
+    'click .btn-del-idea' : function(){
       //remove the client side data delete part
-      //Hopes.remove(this._id);
-      Meteor.call("deleteHope",this._id);
+      //Ideas.remove(this._id);
+      Meteor.call("deleteIdea",this._id);
     },
-    'click .checkb-hope' : function(){
+    'click .checkb-idea' : function(){
       //remove the client side data update part
-      //Hopes.update(this._id,{$set : { checked : !this.checked }});
-      Meteor.call("updateHope",this._id,this.checked);
+      //Ideas.update(this._id,{$set : { checked : !this.checked }});
+      Meteor.call("updateIdea",this._id,this.checked);
     }
+
   });
 
   //meteor add amplify
@@ -67,18 +86,21 @@ if (Meteor.isClient) {
   
 }
 
+//meteor remove unsecure
 //specifically tell meteor what are the things need to done
 Meteor.methods({
-  addHope : function(hope_){
-    Hopes.insert({
-      hope : hope_,
+
+  addIdea : function(idea_){
+    Ideas.insert({
+      idea : idea_,
       created : new Date()
     });
   },
-  updateHope : function(_id,isChecked){
-    Hopes.update(_id,{$set : { checked : !isChecked }});
+  updateIdea : function(_id,isChecked){
+    Ideas.update(_id,{$set : { checked : !isChecked }});
   },
-  deleteHope : function(_id){
-    Hopes.remove(_id);
+  deleteIdea : function(_id){
+    Ideas.remove(_id);
   }
+
 });

@@ -4,22 +4,23 @@
 
 <body>
 
-  <div class="container-hope">
+  <div class="container-idea">
+
 
   <h1>Welcome to Meteor!</h1>
-  <h2>Let's Hope ... </h2>
+  <h2>Be Creative ... </h2>
 
 	{{#if currentUser}}
 	
-		<label class="hide-hopes">
-			<input type="checkbox" checked="{{hideHopes}}" />
-			Hide Achieved Hopes ...
+		<label class="hide-ideas">
+			<input type="checkbox" checked="{{hideIdeas}}" />
+			Hide Achieved Ones ...
 		</label>
 	
   	{{else}}
 	
 		<div>
-			*To add hopes please SignIn
+			*To add Ideas please SignIn
 		</div>
 	
 	{{/if}}
@@ -27,15 +28,15 @@
 	{{> loginButtons}}
 	
   	{{#if currentUser}}
-  	<form class="my-form-hope">
-  		<input type="text" id="txthope" name="txthope" size="30" placeholder="Add a new hope" class="txt-hope" />
-  		<input type="button" name="btnhope" value="Add your hope!" class="btn-hope" />
+  	<form class="my-form-idea">
+  		<input type="text" id="txtidea" name="txtidea" size="30" placeholder="Add a new idea" class="txt-idea" />
+  		<input type="button" name="btnidea" value="Add your idea!" class="btn-idea" />
   	</form>
   	{{/if}}
 
   	<ul>
-  		{{#each hopes}}
-			{{> tempHope}}
+  		{{#each ideas}}
+			{{> tempIdea}}
   		{{/each}}
   	</ul>
   	
@@ -43,10 +44,13 @@
 
 </body>
 
-<template name="tempHope">
+<template name="tempIdea">
   <li class="{{#if checked}} li-checked {{/if}}">
-  	<input type="checkbox" name="checkbhope" class="checkb-hope" checked="{{checked}}" />
-  	<span class="li-text">{{hope}} : {{created}}</span>
-  	<input type="button" name="btndelhope" class="btn-del-hope" value="Delete"/>
+
+
+
+  	<input type="checkbox" name="checkbidea" class="checkb-idea" checked="{{checked}}" />
+  	<span class="li-text">{{idea}} : {{created}}</span>
+  	<input type="button" name="btndelidea" class="btn-del-idea" value="Delete"/>
   </li>
 </template>
