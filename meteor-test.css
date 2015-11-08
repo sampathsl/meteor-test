@@ -64,7 +64,7 @@ ul {
   font-size: 1em;
   padding: 5px 10px;
   border: none;
-  border-radius: 4px;;
+  border-radius: 4px;
 }
  
 li {
@@ -84,4 +84,24 @@ li.li-checked {
  
 li.li-text {
   text-decoration: line-through;
+}
+
+.toggle-private{
+  font-weight: bold;
+  background: orange;
+  color: #FFF;
+  font-size: 1em;
+  padding: 5px 10px 5px 5px;
+  border: none;
+  border-radius: 4px;
+}
+
+.toggle-public{
+  font-weight: bold;
+  background: green;
+  color: #FFF;
+  font-size: 1em;
+  padding: 5px 10px 5px 5px;
+  border: none;
+  border-radius: 4px;
 }

@@ -46,11 +46,21 @@
 
 <template name="tempIdea">
   <li class="{{#if checked}} li-checked {{/if}}">
+	  {{#if isOwner}}
+	  	<button class="{{#if private}}toggle-private{{else}}toggle-public{{/if}}">
+	  		{{#if private}}
+	  			Private Idea
+	  		{{else}}
+	  			Public Idea
+	  		{{/if}}
+	  	</button>
+  		<input type="checkbox" name="checkbidea" class="checkb-idea" checked="{{checked}}" />
+  	{{/if}}
 
-
-
-  	<input type="checkbox" name="checkbidea" class="checkb-idea" checked="{{checked}}" />
   	<span class="li-text">{{idea}} : {{created}}</span>
-  	<input type="button" name="btndelidea" class="btn-del-idea" value="Delete"/>
+
+  	{{#if isOwner}}
+  		<input type="button" name="btndelidea" class="btn-del-idea" value="Delete"/>
+  	 {{/if}}
   </li>
 </template>
